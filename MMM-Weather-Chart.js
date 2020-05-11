@@ -14,7 +14,7 @@ Module.register("MMM-Weather-Chart", {
         retryDelay  : 2500,
         updateInterval: 60 * 60 * 1000,
         animationSpeed: 3000, // fade in and out speed
-        appid: "8332df84f0a138b84f5fab8026acf650",
+        appid: "Your API key",  // https://openweathermap.org/appid
         lat: "51.430720",
         lon: "-0.014421",
         fontSize: 10,
