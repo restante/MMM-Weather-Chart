@@ -28,13 +28,13 @@ To use this module, add the following configuration block to the modules array i
 	        module: 'MMM-Weather-Chart',
 	        position: "top_right",
 	        config: {
-		    title           : "London",
+		    title           	: "London",
 	            width       	: "250px",
 	            height      	: "400px",
 	            updateInterval	: 60 * 60 * 1000,
-	            appid			: "YOUR API KEY", // https://openweathermap.org/api/one-call-api
-	            lat				: "51.430720",
-	            lon				: "-0.014421",
+	            appid		: "YOUR API KEY", // https://openweathermap.org/api/one-call-api
+	            lat			: "51.430720",
+	            lon			: "-0.014421",
 	            fontSize		: 10,
 	        }
 	    }
