@@ -3,7 +3,7 @@ Weather Module showing Temp Max, Min and Pressure.
 
 It uses openweathermap.org one call API : https://openweathermap.org/api/one-call-api
 
-![screenshot](/Users/claudio/Documents/workspace/MMM-Weather-Chart/images/screenshot.png)
+![screenshot](/images/screenshot.png)
 
 
 
