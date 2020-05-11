@@ -9,15 +9,16 @@
 
 Module.register("MMM-Weather-Chart", {
     defaults: {
-        width       : "250px",
-        height      : "400px",
-        retryDelay  : 2500,
-        updateInterval: 60 * 60 * 1000,
-        animationSpeed: 3000, // fade in and out speed
-        appid: "Your API key",  // https://openweathermap.org/appid
-        lat: "51.430720",
-        lon: "-0.014421",
-        fontSize: 10,
+        title           : "London",
+        width           : "250px",
+        height          : "400px",
+        retryDelay      : 2500,
+        updateInterval  : 60 * 60 * 1000,
+        animationSpeed  : 3000, // fade in and out speed
+        appid           : "Your API key",  // https://openweathermap.org/appid
+        lat             : "51.430720",
+        lon             : "-0.014421",
+        fontSize        : 10,
 
     },
 
@@ -97,9 +98,16 @@ Module.register("MMM-Weather-Chart", {
         var element = document.createElement("canvas")
 
         var options = {
+            
             type : 'line',
             data : myData,
             options: {
+                title: {
+                    display: true,
+                    text: this.config.title,
+                    fontColor : "white",
+                    fontSize : 15
+                },
                 legend: {
                     position: 'bottom',
                     align: 'start',
