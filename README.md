@@ -1,23 +1,23 @@
 # MMM-Weather-Chart
 Weather Module showing Temp Max, Min and Pressure.
 
-
 It uses openweathermap.org one call API : https://openweathermap.org/api/one-call-api
 
+![screenshot](/Users/claudio/Documents/workspace/MMM-Weather-Chart/images/screenshot.png)
 
-![Screenshot](/images/screenshot.png)
 
 
-Installation :
+**Installation :**
 
 cd ~/MagicMirror/modules
+
 git clone https://github.com/restante/MMM-Weather-Chart
+
 cd MMM-Weather-Chart
+
 npm install
 
-
-Configuration :
-Using the module
+**Using the module** :
 To use this module, add the following configuration block to the modules array in the config/config.js file:
 
 var config = {
