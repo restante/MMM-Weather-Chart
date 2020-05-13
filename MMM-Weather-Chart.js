@@ -9,7 +9,6 @@
 
 Module.register("MMM-Weather-Chart", {
     defaults: {
-        title           : "London",
         width           : "250px",
         height          : "400px",
         retryDelay      : 2500,
@@ -18,7 +17,9 @@ Module.register("MMM-Weather-Chart", {
         appid           : "Your API key",  // https://openweathermap.org/appid
         lat             : "51.430720",
         lon             : "-0.014421",
-        fontSize        : 10,
+        pointFontColor  : "white",
+        pointFontSize	: 8,
+        chartOptions    : {},
 
     },
 
@@ -66,6 +67,7 @@ Module.register("MMM-Weather-Chart", {
               {
                 label: "Pressure",
                 borderColor : "rgba(255, 255, 255, 0.8)",
+                backgroundColor : "rgba(0, 0, 0, 0)",
                 borderWidth: 1,
                 yAxisID: 'PRESSURE',
                 data: pressureValues,
@@ -74,6 +76,7 @@ Module.register("MMM-Weather-Chart", {
               {
                 label: "°C Min",
                 borderColor : "rgba(63, 191, 191, 0.8)",
+                backgroundColor : "rgba(0, 0, 0, 0)",
                 borderWidth: 1,
                 yAxisID: 'TEMP',
                 data: minTempValues,
@@ -81,6 +84,7 @@ Module.register("MMM-Weather-Chart", {
               {
                 label: "°C Max",
                 borderColor : "rgba(241, 64, 64, 0.8)",
+                backgroundColor : "rgba(0, 0, 0, 0)",
                 borderWidth: 1,
                 yAxisID: 'TEMP',
                 data: maxTempValues,
@@ -101,58 +105,7 @@ Module.register("MMM-Weather-Chart", {
             
             type : 'line',
             data : myData,
-            options: {
-                title: {
-                    display: true,
-                    text: this.config.title,
-                    fontColor : "white",
-                    fontSize : 15
-                },
-                legend: {
-                    position: 'bottom',
-                    align: 'start',
-                    display: true,
-                    labels: {
-                        filter: function(item, chart) {
-                            return !item.text.includes('Weather');
-                        },
-                        fontColor: "white",
-                        fontSize: this.config.fontSize,
-                        boxWidth: 10
-                    }
-                },
-                scales: {
-                    yAxes: [
-                        {
-                            id: 'PRESSURE',
-                            type: 'linear',
-                            position: 'left',
-                            ticks: {
-                                fontColor: "white",
-                                fontSize: this.config.fontSize,
-                                display: false
-                            }
-                        },
-                        {
-                            id: 'TEMP',
-                            type: 'linear',
-                            position: 'right',
-                            ticks: {
-                                fontColor: "white",
-                                fontSize: this.config.fontSize,
-                                display: false,
-                                beginAtZero: true
-                            }
-                        }
-                    ],
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "white",
-                            fontSize: this.config.fontSize,
-                        }
-                    }]
-                }
-            },
+            options: this.config.chartOptions,
             plugins: [{
                 afterDatasetsDraw: function(chart) {
                     var iconNames = ["01d", "02d", "03d", "04d","091d", "10d", "11d", "13d", "50d"];
@@ -161,14 +114,21 @@ Module.register("MMM-Weather-Chart", {
                         if (index === 3) return;
                         var datasetMeta = chart.getDatasetMeta(index);
                         if (datasetMeta.hidden) return;
+                        var mmmWeatherChartModule;
+                        this.config.modules.forEach(function (module, index) {
+                            if (module.module === "MMM-Weather-Chart") {
+                                mmmWeatherChartModule = module;
+                            }
+                        } );
+
                         datasetMeta.data.forEach(function(point, index) {
                         var value = dataset.data[index],
                             x = point.getCenterPoint().x,
                             y = point.getCenterPoint().y,
-                            radius = point._model.radius,
-                            fontSize = 8,
+                            radius = point._model.radius;
+                            fontSize = mmmWeatherChartModule.config.pointFontSize,
                             fontFamily = 'Verdana',
-                            fontColor = 'white',
+                            fontColor = mmmWeatherChartModule.config.pointFontColor,
                             fontStyle = 'normal';
                         ctx.save();
                         ctx.textBaseline = 'middle';
@@ -196,7 +156,9 @@ Module.register("MMM-Weather-Chart", {
                     pic.width = 30;
                     pic.height = 30;
                     //console.log(item, index, picURL);
-                    chart.config.data.datasets[3]._meta[0].data[index]._model.pointStyle = pic;
+                    if (chart.config.data.datasets[3]._meta[0] != undefined) {
+                        chart.config.data.datasets[3]._meta[0].data[index]._model.pointStyle = pic;
+                    }
                   });
                 
           
