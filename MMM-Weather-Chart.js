@@ -38,7 +38,7 @@ Module.register("MMM-Weather-Chart", {
 	getDom: function() {
        const wrapperEl = document.createElement("div");
         wrapperEl.style.width = this.config.width;
-        wrapperEl.style.width = this.config.height;
+        wrapperEl.style.height = this.config.height;
 
         if (!this.loaded) {
             wrapperEl.innerHTML = "Loading...";
@@ -52,13 +52,15 @@ Module.register("MMM-Weather-Chart", {
         var iconValues = []
         var iconX = []
 
-        array.forEach(function(object) {
-            myLabels.push(moment(object.dt * 1000).format("DD MMM"));
-            pressureValues.push(object.pressure);
-            minTempValues.push(object.temp.min);
-            maxTempValues.push(object.temp.max);
-            iconValues.push(object.weather[0].icon);
-            iconX.push(0.5);
+        array.forEach(function(object, index) {
+            if (index < 5) {
+                myLabels.push(moment(object.dt * 1000).format("DD MMM"));
+                pressureValues.push(object.pressure);
+                minTempValues.push(object.temp.min);
+                maxTempValues.push(object.temp.max);
+                iconValues.push(object.weather[0].icon);
+                iconX.push(0.5);
+            }
         });
 
         var myData = {
