@@ -68,7 +68,7 @@ Module.register("MMM-Weather-Chart", {
             datasets: [
               {
                 label: "Pressure",
-                borderColor : "rgba(255, 255, 255, 0.8)",
+                borderColor : "rgba(255, 255, 255, 0.4)",
                 backgroundColor : "rgba(0, 0, 0, 0)",
                 borderWidth: 1,
                 yAxisID: 'PRESSURE',
